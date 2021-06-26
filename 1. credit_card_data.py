@@ -30,5 +30,29 @@ distinctCounter
 # 不正なトランザクション＝「Class列＝１」
 # %%
 print(f'不正なトランザクションの数：', data['Class'].sum())
+# %% [markdown]
+# ## 特徴量行列とラベル配列の作成
 # %%
+# dataXにはラベルを除いたdfを，dataYにはClassの配列データを格納
+dataX = data.copy().drop(['Class'], axis=1)
+dataY = data['Class'].copy()
+# %%
+# 特徴量の標準化処理
+from sklearn.preprocessing import StandardScaler
+
+# Time列のデータは標準化の対象外として処理
+featuresToScale = dataX.drop(['Time'], axis=1).columns
+sX = StandardScaler(copy=True)
+dataX.loc[:, featuresToScale] = sX.fit_transform(dataX[featuresToScale])
+
+# Time列を除く列が平均0, 標準偏差1になっている（＝標準化されている）ことを確認
+dataX.describe()
+# %%
+# 相関をヒートマップで確認
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+plt.figure(figsize=(10, 10))
+# annot：数値の表示，square：正方形で表示
+sns.heatmap(dataX.corr(), annot=False, square=True)
 # %%
