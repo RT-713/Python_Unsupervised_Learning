@@ -10,7 +10,7 @@
 import pandas as pd
 
 # pklデータでの読み込み
-data = pd.read_pickle('./data/credit_card_data/creditcard.pkl')
+data = pd.read_pickle('./data/CreditCard/creditcard.pkl')
 data.head()
 # %%
 # 要約統計量
