@@ -1,16 +1,17 @@
 # %% [markdown]
 # ## 機械学習システム Part1
 # %%
+# 最初のみ実行
+# # データの読み込み
+# data_row = pd.read_csv('./data/credit_card_data/creditcard.csv')
+# # データの変換（csv → pkl）
+# data_row.to_pickle('./data/credit_card_data/creditcard.pkl')
+# %%
 import pandas as pd
 
-# データの読み込み
-data_row = pd.read_csv('./data/credit_card_data/creditcard.csv')
-# データの削減
-data_row.to_pickle('./data/credit_card_data/creditcard.pkl')
-# %%
 # pklデータでの読み込み
 data = pd.read_pickle('./data/credit_card_data/creditcard.pkl')
-data
+data.head()
 # %%
 # 要約統計量
 data.describe()
