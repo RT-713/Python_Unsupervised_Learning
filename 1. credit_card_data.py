@@ -56,3 +56,35 @@ plt.figure(figsize=(10, 10))
 # annot：数値の表示，square：正方形で表示
 sns.heatmap(dataX.corr(), annot=False, square=True)
 # %%
+# 相関行列の作成
+import numpy as np
+from scipy.stats import pearsonr
+
+# 空のdfを用意
+correlationMatrix = pd.DataFrame(data=[], index=dataX.columns, columns=dataX.columns)
+
+# dfに相関係数を計算した結果を順次代入
+for i in dataX.columns:
+    for j in dataX.columns:
+        correlationMatrix.loc[i, j] = np.round(pearsonr(dataX.loc[:, i], dataX.loc[:, j])[0], 2)
+correlationMatrix
+# %% [markdown]
+# ## データの可視化
+# - アンバランスなデータを確認する
+# %%
+# Class列（Series）の一意の値を数える
+count_classes = pd.value_counts(data['Class'], sort=True).sort_index()
+count_classes
+# %%
+# 文字化け対応（フォント指定）
+sns.set(font='Hiragino Sans')
+
+# x軸は0, 1として，y軸は比率とする．
+ax = sns.barplot(x=count_classes.index, y=count_classes/len(data))
+
+# グラフのタイトル・x軸，y軸の名前
+ax.set_title('クラスの出現頻度割合')
+ax.set_xlabel('Class')
+ax.set_ylabel('頻度の割合')
+plt.show()
+# %%
