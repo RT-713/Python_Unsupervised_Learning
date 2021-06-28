@@ -88,3 +88,4 @@ ax.set_xlabel('Class')
 ax.set_ylabel('頻度の割合')
 plt.show()
 # %%
+
